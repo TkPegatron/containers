@@ -36,6 +36,10 @@ on:
         default: 'false'
         type: string
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   build-and-test:
     name: Build and test
