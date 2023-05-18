@@ -1,5 +1,5 @@
 ARG VERSION
-FROM docker.io/library/alpine:3.17 as builder
+FROM docker.io/library/alpine:3.18 as builder
 ARG VERSION
 ARG TARGETOS
 ARG TARGETARCH
