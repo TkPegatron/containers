@@ -1,0 +1,18 @@
+{
+  "app": "awx-ee",
+  "base": false,
+  "channels": [
+    {
+      "name": "rolling",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "stable": true,
+      "tests": {
+        "enabled": false,
+        "type": "cli"
+      }
+    }
+  ]
+}
