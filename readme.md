@@ -10,12 +10,12 @@ This project is based on the work of onedr0p and the k8s@home community, and ext
 
 The containers built here do not use immutable tags, instead pinning the tag to the sha256 digest of the image.
 
-| Container                                          | Immutable |
-|----------------------------------------------------|-----------|
-| `ghcr.io/onedr0p/sonarr:rolling`                   | ❌         |
-| `ghcr.io/onedr0p/sonarr:3.0.8.1507`                | ❌         |
-| `ghcr.io/onedr0p/sonarr:rolling@sha256:8053...`    | ✅         |
-| `ghcr.io/onedr0p/sonarr:3.0.8.1507@sha256:8053...` | ✅         |
+| Container                                           |  Immutable  |
+|-----------------------------------------------------|-------------|
+| `ghcr.io/tkpegatron/alpine:rolling`                   | ❌         |
+| `ghcr.io/tkpegatron/alpine:3.16`                      | ❌         |
+| `ghcr.io/tkpegatron/alpine:rolling@sha256:8053...`    | ✅         |
+| `ghcr.io/tkpegatron/alpine:3.16@sha256:8053...`       | ✅         |
 
 ## Credits
 
