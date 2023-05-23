@@ -1,4 +1,4 @@
-FROM quay.io/ansible/awx-ee:latest@sha256:297114789d1436685d4b1c6383a9cc1e5668c865f37d73dd4083be2b60dcef62
+FROM quay.io/ansible/awx-ee:latest@sha256:df599ea31f352fa0065a0626f1412488af9b7c216922909b674c5a7167804d1b
 
 # Install Python Dependencies
 COPY ./containers/awx-ee/requirements.txt /opt/requirements.txt
