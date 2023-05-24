@@ -29,7 +29,7 @@ ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
 ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
 
 RUN /output/scripts/check_galaxy
-COPY _build /build
+COPY ./containers/awx-ee/build /build
 WORKDIR /build
 
 RUN ansible-galaxy role install $ANSIBLE_GALAXY_CLI_ROLE_OPTS -r requirements.yml --roles-path "/usr/share/ansible/roles"
