@@ -1,4 +1,4 @@
-FROM quay.io/ansible/awx-ee:latest@sha256:df599ea31f352fa0065a0626f1412488af9b7c216922909b674c5a7167804d1b
+FROM quay.io/ansible/awx-ee:latest@sha256:5baf14e999b4a287e0e122c6f50b41cdef79a64889358f1c4db63695f484448b
 
 # Install Python Dependencies
 USER root
