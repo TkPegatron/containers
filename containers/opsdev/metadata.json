@@ -1,0 +1,18 @@
+{
+  "app": "opsdev",
+  "base": true,
+  "channels": [
+    {
+      "name": "rolling",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "stable": false,
+      "tests": {
+        "enabled": false,
+        "type": "cli"
+      }
+    }
+  ]
+}
