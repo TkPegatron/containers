@@ -5,7 +5,7 @@ collections:
   - name: ansible.windows
     version: 1.14.0
   - name: community.general
-    version: 7.0.0
+    version: 8.0.2
   - name: kubernetes.core
     version: 3.0.0
   - name: community.sops
