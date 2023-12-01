@@ -3,7 +3,7 @@
   "base": true,
   "channels": [
     {
-      "name": "rolling",
+      "name": "develop",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
