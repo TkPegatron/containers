@@ -7,6 +7,8 @@ RUN /bin/true \
 
 # -{ MOD: Add ops packages}
 RUN apk add --upgrade --no-cache \
+      # Fundamentals
+      coreutils binutils findutils grep \
       # Shell environment
       zsh bat exa git direnv stow file \
       skim neovim gpg gpg-agent openssh-client \
