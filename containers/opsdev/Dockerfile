@@ -18,7 +18,6 @@ RUN apk add --upgrade --no-cache \
       python3 py3-pip libcrypto3 pcre \
       # Development Tools
       kubectl kustomize helm flux \
-      ansible ansible-lint \
       # Troubleshooting tools
       dog
 
