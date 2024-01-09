@@ -38,7 +38,7 @@ RUN \
         ca-certificates catatonit bash \
         bind-tools coreutils curl iputils jo \
         jq moreutils nano pv tzdata unzip \
-        util-linux wget \
+        util-linux wget shadow \
     && \
     apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.14/main unrar
 
