@@ -36,8 +36,9 @@ RUN apk add --no-cache \
 
 
 # Reassign Apache's UID and GID
-usermod -u UID username
-groupmod -g 3000 foo
+RUN \
+  usermod -u 5540 apache \
+  && groupmod -g 5540 apache
 
 RUN mkdir -p /run/apache2 && chown apache:apache /run/apache2
 
