@@ -1,0 +1,25 @@
+---
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#file
+file:
+  /etc/mysql/conf.d/column-statistics.cnf:
+    exists: true
+  /etc/apache2/conf.d/default.conf:
+    exists: true
+  /etc/apache2/httpd.conf:
+    exists: true
+  /var/www/html/.env:
+    exists: true
+  /entrypoint.sh:
+    exists: true
+
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#group
+group:
+  apache:
+    exists: true
+    gid: 5540
+
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#user
+user:
+  apache:
+    exists: true
+    gid: 5540
