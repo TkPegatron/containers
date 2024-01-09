@@ -34,6 +34,8 @@ RUN apk add --no-cache \
         curl wget git \
         mysql-client
 
+# Hardlink php81 for the entrypoint
+RUN ln -s /usr/bin/php81 /usr/bin/php
 
 # Reassign Apache's UID and GID
 RUN \
@@ -55,6 +57,7 @@ RUN chown -R apache:apache /var/www/html
 
 # Softlink /var/www/ content to /var/lib/snipeit for persitent volume
 RUN \
+  # This portion comes from the upstream docker file
   rm -r "/var/www/html/storage/private_uploads" \
     && mkdir -p "/var/lib/snipeit/data/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
     && rm -rf "/var/www/html/public/uploads" \
@@ -63,11 +66,17 @@ RUN \
     && mkdir -p "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
     && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
     && chown -hR apache "/var/www/html/storage/" \
-    && chown -R apache "/var/lib/snipeit"
+    && chown -R apache "/var/lib/snipeit" 
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN mkdir -p /var/www/.composer && chown apache /var/www/.composer
+
+# Rewrite config files for rootlessness
+RUN /bin/true \
+  && sed -e 's/apache:root/apache:apache/g' -i /entrypoint.sh \
+  && sed -e 's/^Listen 80/Listen 8080/g' -i /etc/apache2/httpd.conf \
+  && sed -e 's/*:80/*:8080/g' -i /etc/apache2/conf.d/default.conf
 
 #---{*Initialize*}---#
 
