@@ -77,7 +77,7 @@ WORKDIR /var/www/html
 
 VOLUME ["/var/lib/snipeit"]
 
-ENTRYPOINT ["/sbin/tini", "--"]
+ENTRYPOINT ["/usr/bin/catatonit", "--"]
 
 CMD ["/entrypoint.sh"]
 
