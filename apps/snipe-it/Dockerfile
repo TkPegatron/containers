@@ -66,7 +66,9 @@ RUN \
     && mkdir -p "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
     && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
     && chown -hR apache "/var/www/html/storage/" \
-    && chown -R apache "/var/lib/snipeit" 
+    && chown -R apache "/var/lib/snipeit" \
+  # This portion is me
+    && chown -R apache "/var/www/logs"
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
