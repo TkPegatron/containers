@@ -68,7 +68,7 @@ RUN \
     && chown -hR apache "/var/www/html/storage/" \
     && chown -R apache "/var/lib/snipeit" \
   # This portion is me
-    && chown -R apache "/var/www/logs"
+    && chown -R apache:apache "/var/log/apache2"
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
