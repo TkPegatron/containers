@@ -8,3 +8,9 @@ channels:
     tests:
       enabled: true
       type: cli
+  - name: "v6.2.0-alpine"
+    platforms: ["linux/amd64", "linux/arm64"]
+    stable: true
+    tests:
+      enabled: true
+      type: cli
