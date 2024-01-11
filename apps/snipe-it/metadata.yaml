@@ -8,7 +8,7 @@ channels:
     tests:
       enabled: true
       type: cli
-  - name: "v6.0.0-alpine"
+  - name: "v5.4.0-alpine"
     platforms: ["linux/amd64", "linux/arm64"]
     stable: true
     tests:
