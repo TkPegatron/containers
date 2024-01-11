@@ -16,8 +16,8 @@ on:
         description: Renovate version
         default: latest
         required: false
-  schedule:
-    - cron: "0 * * * *"
+  #schedule:
+  #  - cron: "0 * * * *"
   push:
     branches: ["main"]
     paths:
