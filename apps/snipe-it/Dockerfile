@@ -1,5 +1,9 @@
 ARG VERSION
 FROM docker.io/snipe/snipe-it:v${VERSION}
+ARG VERSION
+ARG CHANNEL
+ARG TARGETPLATFORM
+ENV TARGETPLATFORM=${TARGETPLATFORM:-linux/amd64}
 
 # Install shadow utilities
 RUN apk add --no-cache shadow catatonit
