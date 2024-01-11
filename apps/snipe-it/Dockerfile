@@ -1,4 +1,5 @@
-FROM docker.io/snipe/snipe-it:${VERSION}
+ARG VERSION
+FROM docker.io/snipe/snipe-it:v${VERSION}
 
 # Install shadow utilities
 RUN apk add --no-cache shadow catatonit
