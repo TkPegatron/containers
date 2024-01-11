@@ -1,4 +1,4 @@
-FROM docker.io/snipe/snipe-it:v6.2.0-alpine@sha256:e3c2c5672def50ac9140f50d7457e710b8829ae85f1af51a1e3a293187a64a52 as upstream
+FROM docker.io/snipe/snipe-it:v6.2.1-alpine@sha256:62abd9ec6ca3f4f1be62e8b98e4a054503dc0ba406265419e62086d64eb0faac as upstream
 FROM ghcr.io/tkpegatron/alpine:rolling
 
 # Install Apache and PHP
