@@ -17,8 +17,8 @@ ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
 ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
 
 RUN $PYCMD -m ensurepip
-COPY ./containers/awx-ee/build/scripts/ /output/scripts/
-COPY ./containers/awx-ee/build/scripts/entrypoint /opt/builder/bin/entrypoint
+COPY ./apps/awx-ee/build/scripts/ /output/scripts/
+COPY ./apps/awx-ee/build/scripts/entrypoint /opt/builder/bin/entrypoint
 
 # Galaxy build stage
 FROM base as galaxy
@@ -30,7 +30,7 @@ ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
 ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
 
 RUN /output/scripts/check_galaxy
-COPY ./containers/awx-ee/build /build
+COPY ./apps/awx-ee/build /build
 WORKDIR /build
 
 RUN ansible-galaxy role install $ANSIBLE_GALAXY_CLI_ROLE_OPTS -r requirements.yml --roles-path "/usr/share/ansible/roles"
@@ -50,7 +50,7 @@ RUN $PYCMD -m pip install --no-cache-dir bindep pyyaml requirements-parser
 
 COPY --from=galaxy /usr/share/ansible /usr/share/ansible
 
-COPY ./containers/awx-ee/build/requirements.txt requirements.txt
+COPY ./apps/awx-ee/build/requirements.txt requirements.txt
 RUN $PYCMD /output/scripts/introspect.py introspect --sanitize --user-pip=requirements.txt --write-bindep=/tmp/src/bindep.txt --write-pip=/tmp/src/requirements.txt
 RUN /output/scripts/assemble
 
