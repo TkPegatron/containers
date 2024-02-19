@@ -4,6 +4,8 @@ FROM quay.io/ansible/awx-ee:${VERSION}
 COPY ./apps/awx-ee/build/requirements.txt .
 COPY ./apps/awx-ee/build/requirements.yml .
 
+USER root
+
 # NOTE: This RUN is an example for if we need bindeps
 #RUN microdnf -y gcc
 
