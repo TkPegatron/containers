@@ -1,5 +1,7 @@
 # AWX Ansible Execution Environment
 
+Latest is the only available upstream kept on quay.io
+
 This context was mostly generated using the `ansible-builder create` command and the following `execution-environment.yml`:
 
 ```yaml
