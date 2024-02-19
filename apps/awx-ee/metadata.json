@@ -3,7 +3,8 @@
   "base": false,
   "channels": [
     {
-      "name": "22.3.0",
+      // Latest is the only available upstream kept on quay.io
+      "name": "latest",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
