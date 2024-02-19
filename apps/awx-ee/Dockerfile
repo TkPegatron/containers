@@ -1,5 +1,6 @@
-ARG EE_BASE_IMAGE="quay.io/ansible/ansible-runner:latest"
-ARG EE_BUILDER_IMAGE="quay.io/ansible/ansible-builder:latest"
+ARG VERSION
+ARG EE_BASE_IMAGE="quay.io/ansible/ansible-runner:${VERSION}"
+ARG EE_BUILDER_IMAGE="quay.io/ansible/ansible-builder:${VERSION}"
 ARG PYCMD="/usr/bin/python3"
 ARG PKGMGR_PRESERVE_CACHE=""
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=""
