@@ -1,73 +1,11 @@
 ARG VERSION
-ARG EE_BASE_IMAGE="quay.io/ansible/ansible-runner:${VERSION}"
-ARG EE_BUILDER_IMAGE="quay.io/ansible/ansible-builder:${VERSION}"
-ARG PYCMD="/usr/bin/python3"
-ARG PKGMGR_PRESERVE_CACHE=""
-ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=""
-ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS=""
+FROM quay.io/ansible/awx-ee:${VERSION}
 
-# Base build stage
-FROM $EE_BASE_IMAGE as base
-USER root
-ARG EE_BASE_IMAGE
-ARG EE_BUILDER_IMAGE
-ARG PYCMD
-ARG PKGMGR_PRESERVE_CACHE
-ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
-ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
+COPY ./apps/awx-ee/build/requirements.txt .
+COPY ./apps/awx-ee/build/requirements.yml .
 
-RUN $PYCMD -m ensurepip
-COPY ./apps/awx-ee/build/scripts/ /output/scripts/
-COPY ./apps/awx-ee/build/scripts/entrypoint /opt/builder/bin/entrypoint
+# NOTE: This RUN is an example for if we need bindeps
+#RUN microdnf -y gcc
 
-# Galaxy build stage
-FROM base as galaxy
-ARG EE_BASE_IMAGE
-ARG EE_BUILDER_IMAGE
-ARG PYCMD
-ARG PKGMGR_PRESERVE_CACHE
-ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
-ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
-
-RUN /output/scripts/check_galaxy
-COPY ./apps/awx-ee/build /build
-WORKDIR /build
-
-RUN ansible-galaxy role install $ANSIBLE_GALAXY_CLI_ROLE_OPTS -r requirements.yml --roles-path "/usr/share/ansible/roles"
-RUN ANSIBLE_GALAXY_DISABLE_GPG_VERIFY=1 ansible-galaxy collection install $ANSIBLE_GALAXY_CLI_COLLECTION_OPTS -r requirements.yml --collections-path "/usr/share/ansible/collections"
-
-# Builder build stage
-FROM base as builder
-WORKDIR /build
-ARG EE_BASE_IMAGE
-ARG EE_BUILDER_IMAGE
-ARG PYCMD
-ARG PKGMGR_PRESERVE_CACHE
-ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
-ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
-
-RUN $PYCMD -m pip install --no-cache-dir bindep pyyaml requirements-parser
-
-COPY --from=galaxy /usr/share/ansible /usr/share/ansible
-
-COPY ./apps/awx-ee/build/requirements.txt requirements.txt
-RUN $PYCMD /output/scripts/introspect.py introspect --sanitize --user-pip=requirements.txt --write-bindep=/tmp/src/bindep.txt --write-pip=/tmp/src/requirements.txt
-RUN /output/scripts/assemble
-
-# Final build stage
-FROM base as final
-ARG EE_BASE_IMAGE
-ARG EE_BUILDER_IMAGE
-ARG PYCMD
-ARG PKGMGR_PRESERVE_CACHE
-ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
-ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
-
-RUN pip3 install --upgrade pip setuptools
-
-COPY --from=galaxy /usr/share/ansible /usr/share/ansible
-
-COPY --from=builder /output/ /output/
-RUN /output/scripts/install-from-bindep && rm -rf /output/wheels
-RUN rm -rf /output
-LABEL ansible-execution-environment=true
+RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN ansible-galaxy collection install -r requirements.yml -p /usr/share/ansible/collections
