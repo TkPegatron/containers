@@ -9,17 +9,17 @@ file:
     exists: true
   /var/www/html/.env:
     exists: true
-  /entrypoint.sh:
+  /startup.sh:
     exists: true
 
 # https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#group
 group:
-  apache:
+  docker:
     exists: true
-    gid: 5540
+    gid: 1000
 
 # https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#user
 user:
-  apache:
+  docker:
     exists: true
-    gid: 5540
+    gid: 1000
